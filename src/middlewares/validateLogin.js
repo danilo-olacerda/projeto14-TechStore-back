@@ -1,4 +1,4 @@
-import Joi, { func } from "joi";
+import Joi from "joi";
 import bcrypt from 'bcrypt';
 import { db } from "../db/mongo.js";
 

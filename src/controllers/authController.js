@@ -1,7 +1,10 @@
 import { db, objectId } from "../db/mongo.js";
 
-async function register(req, res) {
+async function register(_, res) {
 
+    const newUser = res.locals.newUser;
+
+    await db.collection("users").insertOne(newUser);
     res.sendStatus(201);
 }
 
