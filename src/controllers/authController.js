@@ -8,9 +8,25 @@ async function register(_, res) {
     res.sendStatus(201);
 }
 
-async function login(req, res) {
+async function login(_, res) {
 
-    res.sendStatus(200);
+    const newSession = res.locals.newSession;
+
+    const token = {
+        token: newSession.token
+    };
+
+    const currentSession = await db.collection("sessions").findOne({userID: newSession.userID});
+
+    if (currentSession){
+        await db.collection("sessions").updateOne({userID: new objectId(newSession.userID)}, {$set: token});
+        res.status(200).send(token);
+        return;
+    }
+
+    await db.collection("sessions").insertOne(newSession);
+
+    res.status(200).send(token);
 }
 
 export { register, login };
