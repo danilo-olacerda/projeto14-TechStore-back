@@ -7,6 +7,7 @@ const newItemSchema = joi.object({
     value: joi.number().greater(0).required(),
     category: joi.string().min(1).max(30),
     name: joi.string().min(2).max(30).required(),
+    description: joi.string().required(),
     image: joi.string().pattern(new RegExp(imgPattern)).required()
 });
 
