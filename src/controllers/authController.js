@@ -26,7 +26,7 @@ async function login(_, res) {
 
     await db.collection("sessions").insertOne(newSession);
 
-    res.status(200).send(token);
+    res.status(200).send(token.token);
 }
 
 export { register, login };
