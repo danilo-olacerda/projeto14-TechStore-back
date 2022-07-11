@@ -37,6 +37,8 @@ export default async function validateBuy(req, res, next){
 
     */
 
+    console.log(user)
+
     res.locals.user = user;
     res.locals.buys = body;
 

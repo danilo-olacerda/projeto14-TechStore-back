@@ -7,7 +7,7 @@ async function buy(_, res) {
 
     const newBuy = {
         ...buys,
-        userID: user._id
+        userID: user.userID
     };
 
     await db.collection("buys").insertOne(newBuy);
@@ -15,4 +15,14 @@ async function buy(_, res) {
     res.status(200).send(newBuy);
 }
 
-export { buy };
+async function userbuys(req, res) {
+
+    const userID = res.locals.userID;
+
+    const buys = await db.collection("buys").find({userID}).toArray();
+
+    res.send(buys)
+
+}
+
+export { buy, userbuys };
